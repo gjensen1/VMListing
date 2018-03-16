@@ -91,12 +91,19 @@ Function Get-VMListing {
         ForEach ($NIC in $NICs) {
             $into = New-Object PSObject
             Add-Member -InputObject $into -MemberType NoteProperty -Name Host -Value $VM.Host.Name
+            Add-Member -InputObject $into -MemberType NoteProperty -Name Folder -Value $VM.Folder.Name
+            Add-Member -InputObject $into -MemberType NoteProperty -Name Cluster -Value $VM.Folder.Parent.Name
             Add-Member -InputObject $into -MemberType NoteProperty -Name VMName -Value $VM.Name
             Add-Member -InputObject $into -MemberType NoteProperty -Name GuestOS -Value $VM.guest.OSFullName
+            Add-Member -InputObject $into -MemberType NoteProperty -Name vCPU -Value $VM.NumCPU
+            Add-Member -InputObject $into -MemberType NoteProperty -Name MemoryGB -Value $VM.MemoryGB
             Add-Member -InputObject $into -MemberType NoteProperty -Name PowerState -Value $VM.PowerState
             Add-Member -InputObject $into -MemberType NoteProperty -Name NICType -Value $Nic.Type
             Add-Member -InputObject $into -MemberType NoteProperty -Name MACAddress -Value $Nic.MacAddress
             Add-Member -InputObject $into -MemberType NoteProperty -Name Network -Value $Nic.NetworkName
+            Add-Member -InputObject $into -MemberType NoteProperty -Name VMToolsVersion -Value $VM.Guest.ExtensionData.ToolsVersion
+            Add-Member -InputObject $into -MemberType NoteProperty -Name VMToolsVersionStatus -Value $VM.Guest.ExtensionData.ToolsVersionStatus
+            Add-Member -InputObject $into -MemberType NoteProperty -Name VMToolsRunningStatus -Value $VM.Guest.ExtensionData.ToolsRunningStatus
             $Data += $into
         }
     }
