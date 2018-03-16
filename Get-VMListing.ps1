@@ -82,6 +82,7 @@ Function Verify-Folders {
 Function Get-VMListing {
     [CmdletBinding()]
     Param()
+    "Getting Listing of Virtual Machines in $Global:VCName"
     $VMs= Get-VM *
     $Data = @()
 
