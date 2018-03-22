@@ -174,6 +174,10 @@ Function Convert-To-Excel {
 #***************
 # Execute Script
 #***************
+
+# Get Start Time
+$startDTM = (Get-Date)
+
 CLS
 $ErrorActionPreference="SilentlyContinue"
 
@@ -198,4 +202,8 @@ Disconnect-VC
 Invoke-Item $Global:Folder
 #Clean-Up
 
+# Get End Time
+$endDTM = (Get-Date)
 
+# Echo Time elapsed
+"Elapsed Time: $(($endDTM-$startDTM).totalseconds) seconds"
